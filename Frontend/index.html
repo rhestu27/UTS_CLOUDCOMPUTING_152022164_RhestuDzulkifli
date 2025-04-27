@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Produk E-Commerce</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Daftar Produk</h1>
+  <div id="produk-container"></div>
+
+  <script>
+    fetch('/api/produk')
+      .then(response => response.json())
+      .then(data => {
+        const container = document.getElementById('produk-container');
+        data.forEach(p => {
+          const card = document.createElement('div');
+          card.innerHTML = `
+            <img src="${p.gambar_url}" width="200">
+            <h2>${p.nama}</h2>
+            <p>Rp ${p.harga}</p>
+          `;
+          container.appendChild(card);
+        });
+      });
+  </script>
+</body>
+</html>

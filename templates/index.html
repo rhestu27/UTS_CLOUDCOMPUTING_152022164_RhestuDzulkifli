@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produk</title>
+    <style>
+        /* Reset margin dan padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 15px 0;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        /* Navigasi */
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-size: 1.1rem;
+        }
+
+        nav a:hover {
+            color: #007bff;
+        }
+
+        /* Container untuk Produk */
+        .container {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        /* Card Produk */
+        .product-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .product-card h3 {
+            margin-top: 15px;
+            font-size: 1.5rem;
+        }
+
+        .product-card p {
+            font-size: 1.2rem;
+            color: #007bff;
+        }
+
+        .product-card button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .product-card button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Hapus Tombol */
+        .hapus-btn {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .hapus-btn:hover {
+            background-color: darkred;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Daftar Produk</h1>
+</header>
+
+<nav>
+    <a href="/">Beranda</a>
+    <a href="/tambah_produk">Tambah Produk</a>
+</nav>
+
+<div class="container">
+    {% for produk in produk %}
+        <div class="product-card">
+            <img src="{{ produk.gambar_url }}" alt="{{ produk.nama }}">
+            <h3>{{ produk.nama }}</h3>
+            <p>Harga: Rp {{ produk.harga }}</p>
+            <p>Stok: {{ produk.stok }}</p>
+            <button>Detail</button>
+            <!-- Tombol Hapus Produk -->
+            <a href="{{ url_for('hapus_produk', id=produk.id) }}">
+                <button class="hapus-btn">Hapus</button>
+            </a>
+        </div>
+    {% endfor %}
+</div>
+
+<footer>
+    <p>&copy; 2025 Ecommerce</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produk Ecommerce</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Daftar Produk</h1>
+        
+        <form action="/tambah_produk" method="POST">
+            <label for="nama">Nama Produk:</label>
+            <input type="text" id="nama" name="nama" required>
+            <label for="harga">Harga:</label>
+            <input type="number" id="harga" name="harga" required>
+            <label for="gambar_url">URL Gambar:</label>
+            <input type="text" id="gambar_url" name="gambar_url">
+            <label for="stok">Stok:</label>
+            <input type="number" id="stok" name="stok" required>
+            <button type="submit">Tambah Produk</button>
+        </form>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nama</th>
+                    <th>Harga</th>
+                    <th>Gambar</th>
+                    <th>Stok</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in produk %}
+                <tr>
+                    <td>{{ p.id }}</td>
+                    <td>{{ p.nama }}</td>
+                    <td>{{ p.harga }}</td>
+                    <td><img src="{{ p.gambar_url }}" alt="Gambar Produk" style="width: 100px;"></td>
+                    <td>{{ p.stok }}</td>
+                    <td>
+                        <a href="/hapus_produk/{{ p.id }}">Hapus</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
